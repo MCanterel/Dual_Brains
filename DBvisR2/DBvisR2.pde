@@ -5,6 +5,7 @@
  2. Parse data read via UDP object and pipe the correct data into the Graph objects
  ------------- */
 boolean handsTouching;
+boolean DEBUG = true;
 
 LineGraph g, g2;
 Spectrogram s, s2;
@@ -47,10 +48,10 @@ void setup() {
   s2 = new Spectrogram(32, 10, 0, 9, 4, width*0.0125, width*0.5-(width*0.035), -20, false);
 
   //Set DeBug to False for Gabe FrameRate Test
-  g.debugMode = false;
-  s.debugMode = false;
-  g2.debugMode = false;
-  s2.debugMode = false;
+  g.debugMode = DEBUG;
+  s.debugMode = DEBUG;
+  g2.debugMode = DEBUG;
+  s2.debugMode = DEBUG;
 
   //***********************************
   //NETWORKING
@@ -92,12 +93,13 @@ void draw() {
   float [] newData3 = {random(-250,250)};
   //POPULATE RANDOM DATA
   float[] newData = {random(-250, 250), random(-250, 250), random(-250, 250), random(-250, 250), random(-250, 250), random(-250, 250)};
+  // float[] newData = subj1_eeg;
+  
   for (int i = 0; i < s.dataPoints; i++) {
     //newData2[i] = random(0, 11);
     newData2[i] = random(0.0, 10.0);
   }
   
-  //float[] newData = subj1_eeg;
 
   if(handsTouching && frameCount % 10 == 0){
     //spawnLeft(newData3, -250, 250);
@@ -106,16 +108,33 @@ void draw() {
     spawnRight(newData3, -250, 250);
   }
 
-
-  g.update(newData);
-  g2.update(newData);
+  // If data is pulled from UDP, pass it to the drawing board
+  if (subj1_eeg != null) {
+    g.update(subj1_eeg);
+  } else {
+    g.update(newData);
+  }
+  
+  if (subj2_eeg != null) {
+    g2.update(subj2_eeg);
+  } else {
+    g2.update(newData);
+  }
+  
+  if (subj1_fft != null) {
+    s.update(subj1_fft);
+  } else {
+    s.update(newData2);
+  }
+  
+  if (subj2_fft != null) {
+    s.update(subj2_fft);
+  } else {
+    s2.update(newData2);
+  }
 
   g.render();
   g2.render();
-
-  s.update(newData2);
-  s2.update(newData2);
-
   s.render();
   s2.render();
 
@@ -222,10 +241,7 @@ void receive(byte[] received_data) {
   subj2_heart = new float[1];
   subj1_fft = new float[32];
   subj2_fft = new float[32];
-  //println(items.length);
-  //for (int i = 0; i<items.length; i++){
-  //  println(items[i]);
-  //}
+
   for (int i = 0; i<6;i++){
     subj1_eeg[i] = Float.parseFloat(items[i]);
     //println(items[i], subj1_eeg[i]);
