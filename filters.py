@@ -41,7 +41,7 @@ class Filters:
 
 			# if there is too much columns (unfiltered data)
 			if np.shape(data)[0] == 20:
-				data = np.delete(data, [0, 17, 18, 19], 1)
+				data = np.delete(data, [0, 17, 18, 19], 0)
 
 			filtered_eeg = self.noise_filters(data)
 			fft = self.fft_filter(data)

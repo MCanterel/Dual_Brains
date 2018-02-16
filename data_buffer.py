@@ -37,7 +37,7 @@ class Data_Buffer():
 					send.append(pt)
 				for pt in fft2:
 					send.append(pt)
-				# print(np.shape(send))
+				print(np.shape(send))
 				# print(send)
 				udp.receive(send)
 
@@ -64,13 +64,13 @@ def playback(db):
 	# test_file = 'aaron_test_data/Filtered_Data/RAW_eeg_ecg_data_only(eeg_isolated)_FILTERED.txt'
 
 	# RAW_Data_only
-	test_file = 'aaron_test_data/RAW_data_only/RAW_eeg_data_only.txt'
+	# test_file = 'aaron_test_data/RAW_data_only/RAW_eeg_data_only.txt'
 	# test_file = 'aaron_test_data/RAW_data_only/RAW_eeg_ecg_data_only.txt'
 	# test_file = 'aaron_test_data/RAW_data_only/RAW_eeg_ecg_data_only(ecg_isolated).txt'
 	# test_file = 'aaron_test_data/RAW_data_only/RAW_eeg_ecg_data_only(eeg_isolated).txt'
 
 	# RAW_output
-	# test_file = 'aaron_test_data/RAW_output/RAW_eeg_ecg.txt'
+	test_file = 'aaron_test_data/RAW_output/RAW_eeg_ecg.txt'
 	# test_file = 'aaron_test_data/RAW_output/RAW_eeg.txt'
 
 	# test_file = 'aaron_test_data/SavedData\OpenBCI-RAW-aaron+eva.txt'
