@@ -38,6 +38,11 @@ class Filters:
 			data = self.data_buff
 			data = np.asarray(data).T
 			data = data.astype(np.float)
+
+			# if there is too much columns (unfiltered data)
+			if np.shape(data)[0] == 20:
+				data = np.delete(data, [0, 17, 18, 19], 1)
+
 			filtered_eeg = self.noise_filters(data)
 			fft = self.fft_filter(data)
 			return [filtered_eeg, fft]
@@ -47,22 +52,15 @@ class Filters:
 		[b, a] = [self.low_pass_coefficients[0],self.low_pass_coefficients[1]]
 		[bn, an] = [self.notch_coefficients[0],self.notch_coefficients[1]]
 
-
-		notched = []
-		high_passed = []
-		low_passed = []
-		# print(range(len(data)))
-		for i in range(len(data)-1):
-		  channel =  data[i]
+		for i,channel in enumerate(data):
 		  high_passed = signal.filtfilt(b1,a1,channel);        # high pass filter
 		  low_passed = signal.filtfilt(b,a,high_passed);       # low pass filter
-		  y = signal.filtfilt(bn,an,low_passed);        # notch filter
+		  y = signal.filtfilt(bn,an,low_passed);   	     # notch filter
 		  self.filtered_eeg[i] = y;
 		return self.filtered_eeg
 
 	def fft_filter(self,data):
-		# print(np.shape(data))
-		fft = np.empty([16,129])
+		fft = np.empty([16, 129])
 		for i,channel in enumerate(data):
 			#FFT ALGORITHM
 			temp_fft = np.fft.fft(channel)

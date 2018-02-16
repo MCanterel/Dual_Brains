@@ -52,32 +52,41 @@ class Data_Buffer():
 		# 16-2080: channels 0-5 and 8-13 fft data (129 points per channel)
 		self.count = self.count+1
 
-def main():
+def playback(db):
+	'''
+	Plays back recorded files from the aaron_test_data folder.
+	Uncomment the file you want to use.
+	'''
 
-	print 'Starting UDP server'
-	global udp
-	udp = udp_server.UDPServer()
+	# filtered_data
+	# test_file = 'aaron_test_data/Filtered_Data/RAW_eeg_data_only_FILTERED.txt'
+	# test_file = 'aaron_test_data/Filtered_Data/RAW_eeg_ecg_data_only(ecg_isolated)_FILTERED.txt'
+	# test_file = 'aaron_test_data/Filtered_Data/RAW_eeg_ecg_data_only(eeg_isolated)_FILTERED.txt'
 
-	db = Data_Buffer()
-	# board = bci.OpenBCIBoard(port='/dev/ttyUSB0', send=db)
-	# board.start_streaming(db.buffer)
+	# RAW_Data_only
+	test_file = 'aaron_test_data/RAW_data_only/RAW_eeg_data_only.txt'
+	# test_file = 'aaron_test_data/RAW_data_only/RAW_eeg_ecg_data_only.txt'
+	# test_file = 'aaron_test_data/RAW_data_only/RAW_eeg_ecg_data_only(ecg_isolated).txt'
+	# test_file = 'aaron_test_data/RAW_data_only/RAW_eeg_ecg_data_only(eeg_isolated).txt'
 
-	################################
-	#
-	# SIMULATION VERSION
-	#
+	# RAW_output
+	# test_file = 'aaron_test_data/RAW_output/RAW_eeg_ecg.txt'
+	# test_file = 'aaron_test_data/RAW_output/RAW_eeg.txt'
+
+	# test_file = 'aaron_test_data/SavedData\OpenBCI-RAW-aaron+eva.txt'
+	# test_file = 'aaron_test_data/SavedData\OpenBCI-RAW-friday_test.txt'
 
 	channel_data = []
-	with open('aaron_test_data/Filtered_Data/RAW_eeg_data_only_FILTERED.txt', 'r') as file:
+
+	with open(test_file, 'r') as file:
 		reader = csv.reader(file, delimiter=',')
-		# next(file)
-		for j,line in enumerate(reader):
-			line = [x.replace(' ','') for x in line]
-			channel_data.append(line) #list
-			# print(line)
+		for j, line in enumerate(reader):
+			if '%' not in line[0] :
+				line = [x.replace(' ','') for x in line]
+				channel_data.append(line) #list
 
 
-	print 'Reading Simulated channel data:', len(channel_data)
+	print 'Loaded {0} channel lines from {1}'.format(len(channel_data), test_file)
 
 	last_time_of_program = 0
 	start = time.time()
@@ -94,6 +103,16 @@ def main():
 			time.sleep(time_of_recording-time_of_program)
 		db.buffer(sample)
 
+def main():
+	print 'Starting UDP server'
+	global udp
+	udp = udp_server.UDPServer()
+
+	db = Data_Buffer()
+	# board = bci.OpenBCIBoard(port='/dev/ttyUSB0', send=db)
+	# board.start_streaming(db.buffer)
+
+	playback(db)
 
 if __name__ == '__main__':
 	main()
