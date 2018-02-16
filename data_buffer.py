@@ -1,3 +1,6 @@
+# !/usr/local/bin/python
+# -*- coding: utf-8 -*-
+
 import open_bci_v3
 import time
 import filters
@@ -34,8 +37,8 @@ class Data_Buffer():
 					send.append(pt)
 				for pt in fft2:
 					send.append(pt)
-				print(np.shape(send))
-				print(send)
+				# print(np.shape(send))
+				# print(send)
 				udp.receive(send)
 
 		# DATA FORMAT
@@ -51,7 +54,7 @@ class Data_Buffer():
 
 def main():
 
-
+	print 'Starting UDP server'
 	global udp
 	udp = udp_server.UDPServer()
 
@@ -74,8 +77,8 @@ def main():
 			# print(line)
 
 
+	print 'Reading Simulated channel data:', len(channel_data)
 
-	print(len(channel_data))
 	last_time_of_program = 0
 	start = time.time()
 	for i,sample in enumerate(channel_data):
@@ -84,8 +87,8 @@ def main():
 		#Wait for a period of time if the program runs faster than real time
 		time_of_recording = i/250
 		time_of_program = end-start
-		print('i/250 (time of recording)', time_of_recording)
-		print('comp timer (time of program)', time_of_program)
+		# print('i/250 (time of recording)', time_of_recording)
+		# print('comp timer (time of program)', time_of_program)
 		if time_of_recording > time_of_program:
 			# print('PAUSING ', time_of_recording-time_of_program, ' Seconds')
 			time.sleep(time_of_recording-time_of_program)
