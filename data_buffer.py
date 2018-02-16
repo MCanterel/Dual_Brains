@@ -37,7 +37,7 @@ class Data_Buffer():
 					send.append(pt)
 				for pt in fft2:
 					send.append(pt)
-				print(np.shape(send))
+				# print(np.shape(send))
 				# print(send)
 				udp.receive(send)
 
