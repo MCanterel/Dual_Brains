@@ -15,16 +15,17 @@ ArrayList <Point> rightPoints;
 
 float[] subj1_eeg;
 float[] subj1_heart;
-float[] subj2_eeg;
-float[] subj2_heart;
 float[] subj1_fft;
+
+float[] subj2_eeg;
 float[] subj2_fft;
+float[] subj2_heart;
 
 void setup() {
   //size(1080, 768);
   frameRate(20);
-  fullScreen(P3D);
-  //size(640, 480, P3D);
+  //fullScreen(P3D);
+  size(640, 480, P3D);
   background(0);
   backgroundImg = loadImage("GradientBackground-640.jpg");
 
@@ -95,8 +96,12 @@ void draw() {
     //newData2[i] = random(0, 11);
     newData2[i] = random(0.0, 10.0);
   }
+  
+  //float[] newData = subj1_eeg;
 
   if(handsTouching && frameCount % 10 == 0){
+    //spawnLeft(newData3, -250, 250);
+    //spawnRight(newData3, -250, 250);
     spawnLeft(newData3, -250, 250);
     spawnRight(newData3, -250, 250);
   }
@@ -217,12 +222,13 @@ void receive(byte[] received_data) {
   subj2_heart = new float[1];
   subj1_fft = new float[32];
   subj2_fft = new float[32];
-  println(items.length);
-  for (int i = 0; i<items.length; i++){
-    println(items[i]);
-  }
+  //println(items.length);
+  //for (int i = 0; i<items.length; i++){
+  //  println(items[i]);
+  //}
   for (int i = 0; i<6;i++){
     subj1_eeg[i] = Float.parseFloat(items[i]);
+    //println(items[i], subj1_eeg[i]);
   }
   subj1_heart[0] = Float.parseFloat(items[7]);
   for (int i =0;i<6;i++){
