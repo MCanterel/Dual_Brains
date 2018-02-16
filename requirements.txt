@@ -1,0 +1,12 @@
+future==0.16.0
+iso8601==0.1.12
+numpy==1.14.0
+pbr==3.1.1
+PyYAML==3.12
+scipy==1.0.0
+serial==0.0.38
+six==1.11.0
+stevedore==1.28.0
+virtualenv==15.1.0
+virtualenv-clone==0.2.6
+virtualenvwrapper==4.8.2
