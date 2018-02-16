@@ -10,4 +10,11 @@
  - Copy the `gwoptics` library found in [OpenBCI_Processing/libraries](OpenBCI_Processing/libraries) into your home Processing folder `~/Processing/libraries`
  - Restart Processing before launching OpenBCI_GUI
 
-## Running UDP server
+## Running Python
+
+`data_buffer.py` is the file that streams data from the BCI to the Visualizer (DBvisR2)
+
+### Dependences
+  - serial
+  - numpa
+  - scipy

@@ -11,7 +11,7 @@ class Filters:
 		np.set_printoptions(threshold=np.nan)
 
 		self.fs_Hz = 125
-		self.fn = self.fs_Hz/2
+		self.fn = self.fs_Hz/2.0
 		self.filter_window = 256
 		self.data_buff = deque([])
 		self.filtered_data = []
