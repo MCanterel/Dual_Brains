@@ -1,4 +1,4 @@
-class Point {
+class DBPoint {
   PVector loc;
   PVector tLoc;
   //PImage sprt;
@@ -13,7 +13,7 @@ class Point {
   //TODO
   //Add color init
   //Add sprite;
-  Point(float locx, float locy, float sizeX, float sizeY, float speed, boolean driftsLeft){
+  DBPoint(float locx, float locy, float sizeX, float sizeY, float speed, boolean driftsLeft){
     this.loc = new PVector(locx, locy);
     if(driftsLeft){
       this.tLoc = new PVector(-0.1*width, -locy*(locy/height));

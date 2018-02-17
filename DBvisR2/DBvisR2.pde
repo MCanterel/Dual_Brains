@@ -7,12 +7,12 @@
 boolean handsTouching;
 boolean DEBUG = true;
 
-LineGraph g, g2;
-Spectrogram s, s2;
+DBLineGraph g, g2;
+DBSpectrogram s, s2;
 float[][] data_list;
 PImage backgroundImg;
-ArrayList <Point> leftPoints;
-ArrayList <Point> rightPoints;
+ArrayList <DBPoint> leftPoints;
+ArrayList <DBPoint> rightPoints;
 
 float[] subj1_eeg;
 float[] subj1_heart;
@@ -32,20 +32,20 @@ void setup() {
 
   handsTouching = false;
   //Setting up array list for Points
-  leftPoints = new ArrayList<Point>();
-  rightPoints = new ArrayList<Point>();
+  leftPoints = new ArrayList<DBPoint>();
+  rightPoints = new ArrayList<DBPoint>();
 
 
-  //Test Graph
-  //Graph(float SAMPLE_RATE, int TIME_WINDOW, float SCALE, int ORIGIN_X, int ORIGIN_Y){
-  //LineGraph(int CHANNELS, float UPPER_LIM, float LOWER_LIM, float SAMPLE_RATE, int TIME_WINDOW, float SCALE, float ORIGIN_X, float ORIGIN_Y,  boolean IS_ON_LEFT){
-  g = new LineGraph(6, 250, -250, 20, 9, width*0.003, width*0 - 20, height*1.05, true);
-  g2 = new LineGraph(6, 250, -250, 20, 9, width*0.003, width*0.5 - 20, height*1.05, false);
+  // Test Graph
+  // DBGraph(float SAMPLE_RATE, int TIME_WINDOW, float SCALE, int ORIGIN_X, int ORIGIN_Y){
+  // DBLineGraph(int CHANNELS, float UPPER_LIM, float LOWER_LIM, float SAMPLE_RATE, int TIME_WINDOW, float SCALE, float ORIGIN_X, float ORIGIN_Y,  boolean IS_ON_LEFT){
+  g = new DBLineGraph(6, 250, -250, 20, 9, width*0.003, width*0 - 20, height*1.05, true);
+  g2 = new DBLineGraph(6, 250, -250, 20, 9, width*0.003, width*0.5 - 20, height*1.05, false);
 
-  //Spectrogram graph
-  // Spectrogram(int DATAPOINTS, float UPPER_LIM, float LOWER_LIM, float SAMPLE_RATE, int TIME_WINDOW, float SCALE, float ORIGIN_X, float ORIGIN_Y) {
-  s = new Spectrogram(32, 10, 0, 9, 4, width*0.0125, width*0-(width*0.035), -20, true);
-  s2 = new Spectrogram(32, 10, 0, 9, 4, width*0.0125, width*0.5-(width*0.035), -20, false);
+  // DBSpectrogram graph
+  // DBSpectrogram(int DATAPOINTS, float UPPER_LIM, float LOWER_LIM, float SAMPLE_RATE, int TIME_WINDOW, float SCALE, float ORIGIN_X, float ORIGIN_Y) {
+  s = new DBSpectrogram(32, 10, 0, 9, 4, width*0.0125, width*0-(width*0.035), -20, true);
+  s2 = new DBSpectrogram(32, 10, 0, 9, 4, width*0.0125, width*0.5-(width*0.035), -20, false);
 
   //Set DeBug to False for Gabe FrameRate Test
   g.debugMode = DEBUG;
@@ -139,10 +139,10 @@ void draw() {
   s2.render();
 
 
-  for(Point pt : leftPoints){
+  for(DBPoint pt : leftPoints){
     pt.render();
   }
-  for(Point pt : rightPoints){
+  for(DBPoint pt : rightPoints){
     pt.render();
   }
 
@@ -189,7 +189,7 @@ void spawnLeft(float[] heart, float lowerLim, float upperLim){
   for(int i = 0; i < height; i += interval){
     //Point(float locx, float locy, float sizeX, float sizeY, float speed, bool driftsLeft){
     float sizeX = random(20,120);
-    Point pt = new Point(width*0.52, i, sizeX, sizeX, random(0.01, 0.02), true);
+    DBPoint pt = new DBPoint(width*0.52, i, sizeX, sizeX, random(0.01, 0.02), true);
     leftPoints.add(pt);
   }
 }
@@ -199,7 +199,7 @@ void spawnRight(float[] heart, float lowerLim, float upperLim){
   for(int i = 0; i < height; i += interval){
     //Point(float locx, float locy, float sizeX, float sizeY, float speed, bool driftsLeft){
     float sizeX = random(20,120);
-    Point pt = new Point(width*0.48, i, sizeX, sizeX, random(0.01, 0.02), false);
+    DBPoint pt = new DBPoint(width*0.48, i, sizeX, sizeX, random(0.01, 0.02), false);
     rightPoints.add(pt);
   }
 }
@@ -207,13 +207,13 @@ void spawnRight(float[] heart, float lowerLim, float upperLim){
 
 void prune(){
   for(int i = leftPoints.size()-1; i > 0; i--){
-    Point pt = leftPoints.get(i);
+    DBPoint pt = leftPoints.get(i);
     if(pt.alive == false){
       leftPoints.remove(pt);
     }
   }
   for(int i = rightPoints.size()-1; i > 0; i--){
-    Point pt = rightPoints.get(i);
+    DBPoint pt = rightPoints.get(i);
     if(pt.alive == false){
       rightPoints.remove(pt);
     }
