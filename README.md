@@ -1,6 +1,6 @@
 # Dual Brains
 
-## Running DBvisR2
+## Running Dual_Brains_Visualization
 
  - Download [hypermedia](https://ubaa.net/shared/processing/udp/) Processing library and unzip it into the Processing/Libraries folder
 
@@ -12,7 +12,7 @@
 
 ## Running Python
 
-`data_buffer.py` is the file that streams data from the BCI to the Visualizer (DBvisR2)
+`data_buffer.py` is the file that streams data from the BCI to the visualizer (Dual_Brains_Visualization)
 
 ### Dependences
   - serial
