@@ -1,3 +1,6 @@
+# !/usr/local/bin/python
+# -*- coding: utf-8 -*-
+
 from collections import deque
 import numpy as np
 from scipy import signal, fft

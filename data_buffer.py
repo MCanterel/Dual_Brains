@@ -22,7 +22,7 @@ class Data_Buffer():
 		count = 0;
 		if sample and ((count%8) == 0):
 			EEG = []
-			EEG = self.filt.filter_data(sample)
+			EEG = self.filt.filter_data(sample.channel_data)
 			send = []
 
 			if (EEG is not None) and (count%4==0):
@@ -109,10 +109,10 @@ def main():
 	udp = udp_server.UDPServer()
 
 	db = Data_Buffer()
-	# board = bci.OpenBCIBoard(port='/dev/ttyUSB0', send=db)
-	# board.start_streaming(db.buffer)
+	board = bci.OpenBCIBoard(port='/dev/tty.usbserial-DQ007RRX', send=db)
+	board.start_streaming(db.buffer)
 
-	playback(db)
+	# playback(db)
 
 if __name__ == '__main__':
 	main()
