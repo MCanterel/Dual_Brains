@@ -94,10 +94,10 @@ def main():
 	'''
 	Data streamer from OpenBCI to the Dual Brains Visualization
 
-	Lauch either with a BCI connected to a usb port:
+	Launch either with a BCI connected to a usb port:
 	$: python data_buffer.py --serial-port /dev/tty.usbserial-DQ007RRX
 
-	Or using a prerecorded test file:
+	Or using a pre-recorded test file:
 	$: python data_buffer.py --test-file ../aaron_test_data/Filtered_Data/RAW_eeg_data_only_FILTERED.txt
 	'''
 
