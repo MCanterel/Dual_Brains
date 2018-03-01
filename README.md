@@ -1,4 +1,4 @@
-# Dual Brains
+# 🧠 Dual Brains 🧠 
 
 Real-time visual performance driven by the brain data of two performers.  
 https://artahack.io/projects/dual-brains/
@@ -11,24 +11,24 @@ https://artahack.io/projects/dual-brains/
 
 ## Sending data from OpenBCI to Dual_Brains_Visualization
 
-You will need to have Python 2.7 installed (locally or in a virtual env) and some dependencies:
-  - serial
-  - numpy
-  - scipy
+ - You will need to have Python 2.7 installed (locally or in a virtual env) and some dependencies:
+    - serial
+    - numpy
+    - scipy
 
-Run this command to install all dependencies at once:
+  Run this command to install all dependencies at once:
 
-```pip install -r requirements.txt```
+   ```pip install -r requirements.txt```
 
-If you have an OpenBCI connected to the computer, you can stream the data to the visualization like this:
+- If you have an OpenBCI connected to the computer, you can stream the data to the visualization like this:
 
-```python python/data_buffer.py --serial-port /path/to/the/serial/port```
+  ```python python/data_buffer.py --serial-port /path/to/the/serial/port```
 
-If you don't an OpenBCI connected, you can stream pre-recorded test data to the visualization like this:
+- If you don't an OpenBCI connected, you can stream pre-recorded test data to the visualization like this:
 
-```python python/data_buffer.py --test-file /path/to/test/file.txt```
+  ```python python/data_buffer.py --test-file /path/to/test/file.txt```
 
-_Different test files are provided in the `aaron_test_data` folder_
+  *Different test files are provided in the `aaron_test_data` folder*
 
 ## Contributors
  - [Eva Lee](http://www.evaleestudio.com/), Artist & Experimental Filmmaker
