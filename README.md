@@ -16,7 +16,7 @@ https://artahack.io/projects/dual-brains/
     - numpy
     - scipy
 
-  Run this command to install all dependencies at once:
+ - Run this command to install all dependencies at once:
 
   ```pip install -r requirements.txt```
 
