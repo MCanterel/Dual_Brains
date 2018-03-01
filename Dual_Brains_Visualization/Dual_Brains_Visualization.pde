@@ -131,7 +131,7 @@ void draw() {
   }
   
   if (subj2_fft != null) {
-    s.update(subj2_fft);
+    s2.update(subj2_fft);
   } else {
     s2.update(newData2);
   }
@@ -238,18 +238,29 @@ void receive(byte[] received_data) {
   subj2_heart = new float[1];
   subj1_fft = new float[32];
   subj2_fft = new float[32];
-
+  
+/*
+ * Mapping to the input DATA FORMAT
+ * First 18 values are from the raw voltage
+ */
+ 
+  // 0-5: subj 1 eeg
   for (int i = 0; i<6;i++){
     subj1_eeg[i] = Float.parseFloat(items[i]);
-    //println(items[i], subj1_eeg[i]);
   }
-  subj1_heart[0] = Float.parseFloat(items[7]);
+  // 6: subj 1 ecg
+  subj1_heart[0] = Float.parseFloat(items[6]);
+  
+  // 8-13: subj2 eeg
   for (int i =0;i<6;i++){
-    subj2_eeg[i] = Float.parseFloat(items[i+7]);
+    subj2_eeg[i] = Float.parseFloat(items[i+8]);
   }
+  // 14: subj2 ecg
   subj2_heart[0] = Float.parseFloat(items[14]);
+  
+  // 16-2080: channels 0-5 and 8-13 fft data (129 points per channel)
   for (int i=0;i<32;i++){
-    subj1_fft[i] = Float.parseFloat(items[i+15]);
+    subj1_fft[i] = Float.parseFloat(items[i+16]);
   }
   for (int i=0;i<32;i++){
     subj2_fft[i] = Float.parseFloat(items[i+48]);
