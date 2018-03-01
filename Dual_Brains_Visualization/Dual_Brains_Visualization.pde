@@ -4,6 +4,15 @@
  1. initialized necessary Graph objects & a UDP object
  2. Parse data read via UDP object and pipe the correct data into the Graph objects
  ------------- */
+
+// Networking 
+import hypermedia.net.*;
+import java.util.Scanner;
+int PORT_RX=6100; //port
+String HOST_IP="127.0.0.1"; //
+UDP udp;
+
+// Visualization
 boolean handsTouching;
 boolean DEBUG = false;
 
@@ -21,6 +30,7 @@ float[] subj1_fft;
 float[] subj2_eeg;
 float[] subj2_fft;
 float[] subj2_heart;
+
 
 void setup() {
   //size(1080, 768);
@@ -57,7 +67,7 @@ void setup() {
   //NETWORKING
   //THIS MUST BE INCLUDED IN YOUR SETUP
   udp= new UDP(this,PORT_RX,HOST_IP);
-  udp.log(true);
+  udp.log(false);
   udp.listen(true);
   super.start();
   //***********************************
@@ -220,18 +230,10 @@ void prune(){
 
 // **********************************************************
 // NETWORKING
-import hypermedia.net.*;
-import java.util.Scanner;
-int PORT_RX=6100; //port
-String HOST_IP="127.0.0.1"; //
-UDP udp;
-String receivedFromUDP = "";
 
 void receive(byte[] received_data) {
-  receivedFromUDP ="";
   String data = new String(received_data);
   String[] items = data.replaceAll("\\[","").replaceAll("\\]","").split(",");
-  data_list = new float[12][items.length/12];
   subj1_eeg = new float[6];
   subj1_heart = new float[1];
   subj2_eeg = new float[6];
