@@ -58,7 +58,6 @@ class TestSample:
 def playback(db, test_file):
 	'''
 	Plays back recorded files from the aaron_test_data folder.
-	Uncomment the file you want to use.
 	'''
 
 	samples = []
@@ -68,7 +67,7 @@ def playback(db, test_file):
 		for j, line in enumerate(reader):
 			if '%' not in line[0] :
 				line = [x.replace(' ','') for x in line]
-				samples.append(line) #list
+				samples.append(line)
 
 
 	print 'Loaded {0} channel lines from {1}'.format(len(samples), test_file)
