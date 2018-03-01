@@ -20,15 +20,15 @@ https://artahack.io/projects/dual-brains/
 
 - Run this command to install all dependencies at once:
 
-  ```pip install -r requirements.txt```
+  ```pip2 install -r requirements.txt```
 
 - If you have an OpenBCI connected to the computer, you can stream the data to the visualization like this:
 
-  ```python python/data_buffer.py --serial-port /path/to/the/serial/port```
+  ```python2 python/data_buffer.py --serial-port /path/to/the/serial/port```
 
 - If you don't an OpenBCI connected, you can stream pre-recorded test data to the visualization like this:
 
-  ```python python/data_buffer.py --test-file /path/to/test/file.txt```
+  ```python2 python/data_buffer.py --test-file /path/to/test/file.txt```
 
   *Different test files are provided in the `aaron_test_data` folder*
 
