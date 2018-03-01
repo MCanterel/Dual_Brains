@@ -11,12 +11,12 @@ https://artahack.io/projects/dual-brains/
 
 ## Sending data from OpenBCI to Dual_Brains_Visualization
 
- - You will need to have Python 2.7 installed (locally or in a virtual env) and some dependencies:
-    - serial
-    - numpy
-    - scipy
+- You will need to have Python 2.7 installed (locally or in a virtual env) and some dependencies:
+  - serial
+  - numpy
+  - scipy
 
- - Run this command to install all dependencies at once:
+- Run this command to install all dependencies at once:
 
   ```pip install -r requirements.txt```
 
