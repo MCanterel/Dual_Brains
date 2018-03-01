@@ -16,6 +16,8 @@ https://artahack.io/projects/dual-brains/
   - numpy
   - scipy
 
+- You will also need to be sure that OpenBCI drivers are properly installed. See [Driver Setup fro OpenBCI](http://docs.openbci.com/OpenBCI%20Software/01-OpenBCI_GUI#the-openbci-gui-hardwaredriver-setup-for-openbci_gui-and-openbcihub) for more info.
+
 - Run this command to install all dependencies at once:
 
   ```pip install -r requirements.txt```
