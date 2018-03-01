@@ -39,11 +39,6 @@ int direction = 1;
       stroke(#FF0000);
       for (int i = 0; i < this.channels; i++) {//for each channel...
         for (int j = 1; j < numOfReadingsStored; j++) {//connect every point
-
-          //DEBUG UTIL: POINTS MODE
-          // ellipse((sampleRate * timeWindow * scale)/numOfReadingsStored * (j-1) ,
-          //     (-1 * sampleRate * timeWindow * scale) / (channels+1) * (i+1) + map(data[i][j], upperLim, lowerLim, 5 * scale, -5 * scale),1,1);
-
           line((sampleRate * timeWindow * scale)/numOfReadingsStored * (j-1)*direction,
             (-1 * sampleRate * timeWindow * scale) / (channels+1) * (i+1) + map(data[i][j-1], upperLim, lowerLim, 5 * scale, -5 * scale),
             (sampleRate * timeWindow * scale)/numOfReadingsStored * j*direction,
@@ -63,18 +58,14 @@ int direction = 1;
 
           strokeCap(PROJECT);
           strokeWeight(3);
-          //color[] cs = {color(#A4036F), color(#048BA8), color(#16DB93), color(#EFEA5A), color(#F29E4C), color(#50D0ED)};
           //Swatch from Mockup
           color[] swatch = {color(#010552), color(#2afd61), color(#fd85fd), color(#5582a5), color(#af1ecd), color(#ffffff), color(#2cfefd), color(#fffd76)};
-          //color[] swatch = {color(#8f435c), color(#db854c), color(#e8d889), color(#ec6232), color(#facb65), color(#6b9080), color(#efd937), color(#a48269)};
-
 
           //DRAW BACKGROUND CURVE
           for(int i = this.channels-1; i >= 0; i--){//for each channel...
             strokeCap(PROJECT);
             beginShape();
             for(int j = 1; j < numOfReadingsStored; j++){//connect every point
-
               //DEBUG UTIL: LINE MODE
                 float baseWave = sin(TWO_PI * j/numOfReadingsStored) * cos(millis()*0.0001 + 0.2);
                 colorMode(RGB, 255,255,255,100);
@@ -84,10 +75,6 @@ int direction = 1;
                 strokeWeight(55*(channels-i)/channels);
                 curveVertex(-width/64 + scale * (j-1) ,
                     (-1 * numOfReadingsStored * scale) / (channels+1) * (i+1) + (baseWave * (i+0.5) * height*0.03));
-                // line(-10 + scale * (j-1) ,
-                //     (-1 * numOfReadingsStored * scale) / (channels+1) * (i+1) + (baseWave * i * 15) ,
-                //     scale * j,
-                //     (-1 * sampleRate * timeWindow * scale) / (channels+1) * (i+1) + (baseWave * i * 15) );
               }//end j for loop
               endShape();
           } //end i for loop
@@ -105,7 +92,6 @@ int direction = 1;
               int colorCode = floor(map(data[i][j], lowerLim, upperLim, 0, 8));
               colorCode = constrain(colorCode, 0, 7);
               //Add alpha value to swatch color
-              //color c = color(red(swatch[colorCode]), green(swatch[colorCode]), blue(swatch[colorCode]), alpha*0.3);
               color c = color(red(swatch[(channels-i)]), green(swatch[(channels-i)]), blue(swatch[(channels-i)]), alpha*0.1);
               stroke(c);
               float baseWave = sin(TWO_PI * j/numOfReadingsStored) * cos(millis()*0.0001);
@@ -137,11 +123,8 @@ int direction = 1;
 
           strokeCap(PROJECT);
           strokeWeight(3);
-          //color[] cs = {color(#A4036F), color(#048BA8), color(#16DB93), color(#EFEA5A), color(#F29E4C), color(#50D0ED)};
           //Swatch from Mockup
           color[] swatch = {color(#010552), color(#2afd61), color(#fd85fd), color(#5582a5), color(#af1ecd), color(#ffffff), color(#2cfefd), color(#fffd76)};
-          //color[] swatch = {color(#8f435c), color(#db854c), color(#e8d889), color(#ec6232), color(#facb65), color(#6b9080), color(#efd937), color(#a48269)};
-
 
           //DRAW BACKGROUND CURVE
           for(int i = this.channels-1; i >= 0; i--){//for each channel...
@@ -158,10 +141,6 @@ int direction = 1;
                 strokeWeight(55*(channels-i)/channels);
                 curveVertex(-10 + scale * (numOfReadingsStored-j-1) ,
                     (-1 * numOfReadingsStored * scale) / (channels+1) * (i+1) + (baseWave * (i+0.5) * 15));
-                // line(-10 + scale * (j-1) ,
-                //     (-1 * numOfReadingsStored * scale) / (channels+1) * (i+1) + (baseWave * i * 15) ,
-                //     scale * j,
-                //     (-1 * sampleRate * timeWindow * scale) / (channels+1) * (i+1) + (baseWave * i * 15) );
               }//end j for loop
               endShape();
           } //end i for loop
@@ -179,7 +158,6 @@ int direction = 1;
               int colorCode = floor(map(data[i][j], lowerLim, upperLim, 0, 8));
               colorCode = constrain(colorCode, 0, 7);
               //Add alpha value to swatch color
-              //color c = color(red(swatch[colorCode]), green(swatch[colorCode]), blue(swatch[colorCode]), alpha*0.3);
               color c = color(red(swatch[(channels-i)]), green(swatch[(channels-i)]), blue(swatch[(channels-i)]), alpha*0.1);
               stroke(c);
               float baseWave = sin(TWO_PI * j/numOfReadingsStored) * cos(millis()*0.0001);

@@ -5,7 +5,7 @@
  2. Parse data read via UDP object and pipe the correct data into the Graph objects
  ------------- */
 boolean handsTouching;
-boolean DEBUG = true;
+boolean DEBUG = false;
 
 LineGraph g, g2;
 Spectrogram s, s2;
@@ -25,8 +25,8 @@ float[] subj2_heart;
 void setup() {
   //size(1080, 768);
   frameRate(20);
-  //fullScreen(P3D);
-  size(640, 480, P3D);
+  fullScreen(P3D);
+  //size(640, 480, P3D);
   background(0);
   backgroundImg = loadImage("GradientBackground-640.jpg");
 
@@ -72,18 +72,21 @@ void draw() {
 
   if(g.debugMode == false){
     //background(#210e25);
-    colorMode(RGB,100);
+    //colorMode(RGB,100);
     if(handsTouching){
-      fill(color(red(#000606),green(#000606),blue(#000606),15));
+      //fill(color(red(#000606),green(#000606),blue(#000606),15));
+      fill(637535750);
     } else {
-      fill(color(red(#210e25),green(#210e25),blue(#210e25),35));
+      //fill(color(red(#210e25),green(#210e25),blue(#210e25),35));
+      fill(1495338533);
     }
     noStroke();
     rect(0,0,width,height);
   } else {
     //background(0);
-    colorMode(RGB,100);
-    fill(0,0,0,70);
+    //colorMode(RGB,100);
+    //fill(0,0,0,70);
+    fill(-1308622848);
     noStroke();
     rect(0,0,width,height);
   }
@@ -163,13 +166,7 @@ void draw() {
     popStyle();
   }
 
-
-
   prune();
-
-  // fill(color(#FFFFFF));
-  // text(frameRate, 20, 20);
-
 }
 
 void mousePressed(){
