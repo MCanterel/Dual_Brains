@@ -1,4 +1,4 @@
-# 🧠 Dual Brains 🧠 
+# 🧠 Dual Brains 🧠
 
 Real-time visual performance driven by the brain data of two performers.  
 https://artahack.io/projects/dual-brains/
@@ -18,7 +18,7 @@ https://artahack.io/projects/dual-brains/
 
   Run this command to install all dependencies at once:
 
-   ```pip install -r requirements.txt```
+  ```pip install -r requirements.txt```
 
 - If you have an OpenBCI connected to the computer, you can stream the data to the visualization like this:
 
