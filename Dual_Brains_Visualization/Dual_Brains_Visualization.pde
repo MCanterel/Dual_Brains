@@ -11,6 +11,8 @@ import java.util.Scanner;
 int PORT_RX=6100; //port
 String HOST_IP="127.0.0.1"; //
 UDP udp;
+boolean isReceivingData = false;
+
 
 // Visualization
 boolean handsTouching;
@@ -72,6 +74,12 @@ void setup() {
   super.start();
   //***********************************
 
+  subj1_eeg = new float[6];
+  subj1_heart = new float[1];
+  subj2_eeg = new float[6];
+  subj2_heart = new float[1];
+  subj1_fft = new float[32];
+  subj2_fft = new float[32];
 }
 
 void draw() {
@@ -106,7 +114,6 @@ void draw() {
   float [] newData3 = {random(-250,250)};
   //POPULATE RANDOM DATA
   float[] newData = {random(-250, 250), random(-250, 250), random(-250, 250), random(-250, 250), random(-250, 250), random(-250, 250)};
-  // float[] newData = subj1_eeg;
   
   for (int i = 0; i < s.dataPoints; i++) {
     //newData2[i] = random(0, 11);
@@ -115,34 +122,20 @@ void draw() {
   
 
   if(handsTouching && frameCount % 10 == 0){
-    //spawnLeft(newData3, -250, 250);
-    //spawnRight(newData3, -250, 250);
     spawnLeft(newData3, -250, 250);
     spawnRight(newData3, -250, 250);
   }
 
   // If data is pulled from UDP, pass it to the drawing board
-  if (subj1_eeg != null) {
+  if (isReceivingData) {
     g.update(subj1_eeg);
-  } else {
-    g.update(newData);
-  }
-  
-  if (subj2_eeg != null) {
     g2.update(subj2_eeg);
-  } else {
-    g2.update(newData);
-  }
-  
-  if (subj1_fft != null) {
     s.update(subj1_fft);
-  } else {
-    s.update(newData2);
-  }
-  
-  if (subj2_fft != null) {
     s2.update(subj2_fft);
   } else {
+    g.update(newData);
+    g2.update(newData);
+    s.update(newData2);
     s2.update(newData2);
   }
 
@@ -177,6 +170,7 @@ void draw() {
   }
 
   prune();
+  isReceivingData = false;
 }
 
 void mousePressed(){
@@ -187,7 +181,9 @@ void mousePressed(){
 }
 
 void keyPressed(){
-  handsTouching = !handsTouching;
+  if (key == ' ') {
+    handsTouching = !handsTouching;
+  }
 }
 
 
@@ -232,14 +228,9 @@ void prune(){
 // NETWORKING
 
 void receive(byte[] received_data) {
+  isReceivingData = true;
   String data = new String(received_data);
   String[] items = data.replaceAll("\\[","").replaceAll("\\]","").split(",");
-  subj1_eeg = new float[6];
-  subj1_heart = new float[1];
-  subj2_eeg = new float[6];
-  subj2_heart = new float[1];
-  subj1_fft = new float[32];
-  subj2_fft = new float[32];
   
 /*
  * Mapping to the input DATA FORMAT
