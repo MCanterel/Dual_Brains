@@ -1,7 +1,7 @@
 # !/usr/local/bin/python
 # -*- coding: utf-8 -*-
 
-import sys
+import sys, os
 import time
 import filters
 import time
@@ -122,4 +122,11 @@ def main():
 		playback(db, path)
 
 if __name__ == '__main__':
-	main()
+	try:
+		main()
+	except KeyboardInterrupt:
+		print '\nShutdown requested... Exiting.'
+		try:
+			sys.exit(0)
+		except SystemExit:
+			os._exit(0)
