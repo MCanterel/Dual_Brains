@@ -13,6 +13,8 @@ String HOST_IP="127.0.0.1"; //
 UDP udp;
 boolean isReceivingData = false;
 
+// Controls
+Controls controls;
 
 // Visualization
 boolean handsTouching;
@@ -33,14 +35,21 @@ float[] subj2_eeg;
 float[] subj2_fft;
 float[] subj2_heart;
 
+float[] newData;
+float[] newData2;
+float[] newData3;
+
+void settings() {
+  fullScreen(P3D);
+  smooth();
+}
 
 void setup() {
-  //size(1080, 768);
   frameRate(20);
-  fullScreen(P3D);
-  //size(640, 480, P3D);
   background(0);
   backgroundImg = loadImage("GradientBackground-640.jpg");
+  
+  controls = new Controls();
 
   handsTouching = false;
   //Setting up array list for Points
@@ -80,6 +89,10 @@ void setup() {
   subj2_heart = new float[1];
   subj1_fft = new float[32];
   subj2_fft = new float[32];
+  
+  newData = new float[8];
+  newData2 = new float[s.dataPoints];
+  newData3 = new float[1];
 }
 
 void draw() {
@@ -109,17 +122,28 @@ void draw() {
     rect(0,0,width,height);
   }
 
-
-  float [] newData2 = new float[s.dataPoints];
-  float [] newData3 = {random(-250,250)};
-  //POPULATE RANDOM DATA
-  float[] newData = {random(-250, 250), random(-250, 250), random(-250, 250), random(-250, 250), random(-250, 250), random(-250, 250)};
   
-  for (int i = 0; i < s.dataPoints; i++) {
-    //newData2[i] = random(0, 11);
-    newData2[i] = random(0.0, 10.0);
+  //POPULATE RANDOM DATA
+  if (dataSource == RANDOM_DATA) {
+    for (int i = 0; i < newData.length; i++) {
+      newData[i] = random(-250, 250);
+    }
+    for (int i = 0; i < newData2.length; i++) {
+      newData2[i] = random(0.0, 10.0);
+    }
+    newData3[0] = random(-250,250);
   }
   
+  //POPULATE NO DATA
+  if (dataSource == NO_DATA) {
+    for (int i = 0; i < newData.length; i++) {
+      newData[i] = 0;
+    }
+    for (int i = 0; i < newData2.length; i++) {
+      newData2[i] = 0;
+    }
+    newData3[0] = 0;
+  }
 
   if(handsTouching && frameCount % 10 == 0){
     spawnLeft(newData3, -250, 250);
@@ -127,7 +151,7 @@ void draw() {
   }
 
   // If data is pulled from UDP, pass it to the drawing board
-  if (isReceivingData) {
+  if (dataSource == STREAM_DATA && isReceivingData) {
     g.update(subj1_eeg);
     g2.update(subj2_eeg);
     s.update(subj1_fft);
@@ -180,11 +204,11 @@ void mousePressed(){
   s2.debugMode = !s2.debugMode;
 }
 
-void keyPressed(){
-  if (key == ' ') {
-    handsTouching = !handsTouching;
-  }
-}
+//void keyPressed(){
+//  if (key == ' ') {
+//    handsTouching = !handsTouching;
+//  }
+//}
 
 
 void spawnLeft(float[] heart, float lowerLim, float upperLim){
