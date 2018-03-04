@@ -6,7 +6,7 @@ Textlabel label;
 final int NO_DATA = 0;
 final int STREAM_DATA = 1;
 final int RANDOM_DATA = 2;
-int dataSource = RANDOM_DATA;
+int dataSource = NO_DATA;
 
 class Controls extends PApplet {
   //JFrame frame;
