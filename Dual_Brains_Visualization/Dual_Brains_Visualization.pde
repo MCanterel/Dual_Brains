@@ -20,6 +20,10 @@ Controls controls;
 boolean handsTouching;
 boolean DEBUG = false;
 
+float LEFT_BORDER;
+float RIGHT_BORDER;
+float UPPER_BORDER;
+
 LineGraph g, g2;
 Spectrogram s, s2;
 float[][] data_list;
@@ -40,6 +44,9 @@ float[] newData2;
 float[] newData3;
 
 void settings() {
+  // If you have a second screen
+  //fullScreen(P3D, 2);
+  // If you have only one screen
   fullScreen(P3D);
   smooth();
 }
@@ -49,6 +56,13 @@ void setup() {
   background(0);
   backgroundImg = loadImage("GradientBackground-640.jpg");
   
+  LEFT_BORDER = -.1*width;
+  RIGHT_BORDER = 1.1*width;
+  UPPER_BORDER = -.01*height;
+  
+  println(LEFT_BORDER, RIGHT_BORDER, UPPER_BORDER);
+  
+
   controls = new Controls();
 
   handsTouching = false;
@@ -197,17 +211,11 @@ void draw() {
   isReceivingData = false;
 }
 
-void mousePressed(){
-  g.debugMode = !g.debugMode;
-  s.debugMode = !s.debugMode;
-  g2.debugMode = !g2.debugMode;
-  s2.debugMode = !s2.debugMode;
-}
-
-//void keyPressed(){
-//  if (key == ' ') {
-//    handsTouching = !handsTouching;
-//  }
+//void mousePressed(){
+//  g.debugMode = !g.debugMode;
+//  s.debugMode = !s.debugMode;
+//  g2.debugMode = !g2.debugMode;
+//  s2.debugMode = !s2.debugMode;
 //}
 
 
@@ -216,7 +224,7 @@ void spawnLeft(float[] heart, float lowerLim, float upperLim){
   for(int i = 0; i < height; i += interval){
     //Point(float locx, float locy, float sizeX, float sizeY, float speed, bool driftsLeft){
     float sizeX = random(20,120);
-    Point pt = new Point(width*0.52, i, sizeX, sizeX, random(0.01, 0.02), true);
+    Point pt = new Point(width/2, i, sizeX, sizeX, random(0.01, 0.02), true);
     leftPoints.add(pt);
   }
 }
@@ -226,7 +234,7 @@ void spawnRight(float[] heart, float lowerLim, float upperLim){
   for(int i = 0; i < height; i += interval){
     //Point(float locx, float locy, float sizeX, float sizeY, float speed, bool driftsLeft){
     float sizeX = random(20,120);
-    Point pt = new Point(width*0.48, i, sizeX, sizeX, random(0.01, 0.02), false);
+    Point pt = new Point(width/2, i, sizeX, sizeX, random(0.01, 0.02), false);
     rightPoints.add(pt);
   }
 }
