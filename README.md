@@ -3,6 +3,9 @@
 Real-time visual performance driven by the brain data of two performers.  
 https://artahack.io/projects/dual-brains/
 
+![Eva and Aaron at the Spring/Break Art Show 2018, NYC](images/SpringBreak-Art-Show-180308-web.png)
+Photo credit: © Kevin Barry - ThoughtWorks
+
 ## Running Dual_Brains_Visualization
 
  - Download and install [Processing](https://processing.org/)
