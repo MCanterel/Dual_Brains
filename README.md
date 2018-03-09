@@ -30,7 +30,7 @@ https://artahack.io/projects/dual-brains/
 
   ```python2 python/data_buffer.py --test-file /path/to/test/file.txt```
 
-  *Different test files are provided in the `aaron_test_data` folder*
+  *Different test files are provided in the `test_files` folder*
 
 ## Contributors
  - [Eva Lee](http://www.evaleestudio.com/), Artist & Experimental Filmmaker
