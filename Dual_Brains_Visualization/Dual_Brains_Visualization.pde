@@ -39,9 +39,14 @@ float[] subj2_eeg;
 float[] subj2_fft;
 float[] subj2_heart;
 
-float[] newData;
-float[] newData2;
-float[] newData3;
+int dataLength;
+
+float[] newDataLeft;
+float[] newData2Left;
+float[] newData3Left;
+float[] newDataRight;
+float[] newData2Right;
+float[] newData3Right;
 
 float fountain_interval;
 float fountain_min_interval;
@@ -107,10 +112,16 @@ void setup() {
   subj2_heart = new float[1];
   subj1_fft = new float[32];
   subj2_fft = new float[32];
-
-  newData = new float[8];
-  newData2 = new float[s.dataPoints];
-  newData3 = new float[1];
+  
+  dataLength = 8;
+  
+  newDataLeft = new float[dataLength];
+  newData2Left = new float[s.dataPoints];
+  newData3Left = new float[1];
+  
+  newDataRight = new float[dataLength];
+  newData2Right = new float[s2.dataPoints];
+  newData3Right = new float[1];
 
   fountain_interval = 40.0;
   fountain_min_interval = 10.0;
@@ -147,29 +158,40 @@ void draw() {
 
   //POPULATE RANDOM DATA
   if (dataSource == RANDOM_DATA) {
-    for (int i = 0; i < newData.length; i++) {
-      newData[i] = random(-250, 250);
+    for (int i = 0; i < newDataLeft.length; i++) {
+      newDataLeft[i] = random(-250, 250);
     }
-    for (int i = 0; i < newData2.length; i++) {
-      newData2[i] = random(0.0, 10.0);
+    for (int i = 0; i < newData2Left.length; i++) {
+      newData2Left[i] = random(0.0, 10.0);
     }
-    newData3[0] = random(-250, 250);
+    newData3Left[0] = random(-250, 250);
+    
+    for (int i = 0; i < newDataRight.length; i++) {
+      newDataRight[i] = random(-250, 250);
+    }
+    for (int i = 0; i < newData2Right.length; i++) {
+      newData2Right[i] = random(0.0, 10.0);
+    }
+    newData3Right[0] = random(-250, 250);
   }
 
   //POPULATE NO DATA
   if (dataSource == NO_DATA) {
-    for (int i = 0; i < newData.length; i++) {
-      newData[i] = 0;
+    for (int i = 0; i < newDataLeft.length; i++) {
+      newDataLeft[i] = 0;
+      newDataRight[i] = 0;
     }
-    for (int i = 0; i < newData2.length; i++) {
-      newData2[i] = 0;
+    for (int i = 0; i < newData2Left.length; i++) {
+      newData2Left[i] = 0;
+      newData2Right[i] = 0;
     }
-    newData3[0] = 0;
+    newData3Left[0] = 0;
+    newData3Right[0] = 0;
   }
 
   if (handsTouching && frameCount % floor(fountain_interval) == 0) {
-    spawnLeft(newData3, -250, 250);
-    spawnRight(newData3, -250, 250);
+    spawnLeft(newData3Left, -250, 250);
+    spawnRight(newData3Right, -250, 250);
   }
 
   // If data is pulled from UDP, pass it to the drawing board
@@ -179,10 +201,10 @@ void draw() {
     s.update(subj1_fft);
     s2.update(subj2_fft);
   } else {
-    g.update(newData);
-    g2.update(newData);
-    s.update(newData2);
-    s2.update(newData2);
+    g.update(newDataLeft);
+    g2.update(newDataRight);
+    s.update(newData2Left);
+    s2.update(newData2Right);
   }
 
   if (handsTouching) {
