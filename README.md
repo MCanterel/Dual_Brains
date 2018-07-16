@@ -3,6 +3,9 @@
 Real-time visual performance driven by the brain data of two performers.  
 https://artahack.io/projects/dual-brains/
 
+![Eva and Aaron at the Spring/Break Art Show 2018, NYC](images/SpringBreak-Art-Show-180308-web.png)
+Photo credit: © Kevin Barry - ThoughtWorks
+
 ## Running Dual_Brains_Visualization
 
  - Download and install [Processing](https://processing.org/)
@@ -50,7 +53,6 @@ https://artahack.io/projects/dual-brains/
 
 - If you want to run the Python script with test data instead:
  ```python python/data_buffer.py --test-file aaron_test_data/OpenBCI-RAW-aaron+eva.txt ```
- 
 
 ## Contributors
  - [Eva Lee](http://www.evaleestudio.com/), Artist & Experimental Filmmaker
